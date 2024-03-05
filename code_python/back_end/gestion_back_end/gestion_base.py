@@ -9,7 +9,7 @@ class gestion_base:
         self.__la_base.close()   
 
     def recuperer_tab_donne_medecin_par_code(self, code_medecin):
-        self.__executeur.execute(f"SELECT * FROM Medecin WHERE Code_medecin= '{code_medecin}'")
+        self.__executeur.execute(f"SELECT * FROM Medecin WHERE Code_medecin= ?", (code_medecin, ))
         return self.__executeur.fetchone()
         
     def recuperer_tab_donne_assistant_par_code(self, code_assistant):
