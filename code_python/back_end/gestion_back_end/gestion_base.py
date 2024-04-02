@@ -62,7 +62,8 @@ class gestion_base:
                 str_elt_egale_valeur+= " , "+f"{elt[0]}= '{elt[1]}'" 
             return str_elt_egale_valeur                                         
 
-    def recuper_donner_table_selon_condition(self, Nom_table, tab_elt_contrainte=[]) :#le tableau de contrainte est une liste de liste contenant 2 elt l'attribut et la valeur de condition
+    def recuper_donner_table_selon_condition(self, Nom_table, tab_elt_contrainte=None) :#le tableau de contrainte est une liste de liste contenant 2 elt l'attribut et la valeur de condition
+        tab_elt_contrainte = [] if tab_elt_contrainte is None else tab_elt_contrainte
         la_requette= f"SELECT * FROM {Nom_table}"
         nb_elt= len(tab_elt_contrainte)
         if(nb_elt!= 0):
@@ -70,7 +71,8 @@ class gestion_base:
         self.__executeur.execute(la_requette)       
         return self.__executeur.fetchall()    
 
-    def supprimer_donner_table_selon_condition(self,  Nom_table, tab_elt_contrainte=[]):
+    def supprimer_donner_table_selon_condition(self,  Nom_table, tab_elt_contrainte=None):
+        tab_elt_contrainte = [] if tab_elt_contrainte is None else tab_elt_contrainte
         try:
            la_requette= f"DELETE FROM {Nom_table}" 
            nb_elt= len(tab_elt_contrainte)
