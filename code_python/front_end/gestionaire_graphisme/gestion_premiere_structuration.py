@@ -38,11 +38,11 @@ class gestion_structuration_1:
     __largeur_minimale_fenetre= 900
 
 #nous prenons l'entete comme element plus large
-    def largeur_minimale_visibilite():
+    def largeur_minimale_visibilite(self):
         return gestion_structuration_1.__largeur_minimale_fenetre
 
 #la hauteur minimale de visbilite
-    def hauteur_minimale_visiblilite():
+    def hauteur_minimale_visiblilite(self):
         return gestion_structuration_1.__hauteur_entete+ gestion_structuration_1.__hauteur_minimale_centre+ gestion_structuration_1.__hauteur_pied+ 3* gestion_structuration_1.__espace_entre_block 
 
     def __init__(self, feuille: tk.Canvas, nom_premiere_page, couleur, police_grand_ecrit, police_petit_ecris, photo, couleur_bordure) :
