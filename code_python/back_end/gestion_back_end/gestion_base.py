@@ -9,11 +9,11 @@ class gestion_base:
         self.__la_base.close()   
 
     def recuperer_tab_donne_medecin_par_code(self, code_medecin):
-        self.__executeur.execute(f"SELECT * FROM Medecin WHERE Code_medecin= '{code_medecin}'")
+        self.__executeur.execute("SELECT * FROM Medecin WHERE Code_medecin= ?", (code_medecin, ))
         return self.__executeur.fetchone()
         
     def recuperer_tab_donne_assistant_par_code(self, code_assistant):
-        self.__executeur.execute(f"SELECT * FROM Assistant WHERE Code_assistant= '{code_assistant}'")   
+        self.__executeur.execute("SELECT * FROM Assistant WHERE Code_assistant= ?", (code_assistant, ))   
         return self.__executeur.fetchone() 
 
     def ajouter_elt_dans_table(self, nom_table, tab_info):
@@ -32,18 +32,18 @@ class gestion_base:
         return False        
 
     def recuper_examination(self, code_patient):
-        la_requette= f"SELECT Nom, Date, Heure_debut, Heure_fin,  Type, Remarque, Resultat, Prescription FROM Medecin AS m INNER JOIN Examination as e ON m.Code_medecin = e.Code_medecin WHERE Code_patient= '{code_patient}'" 
-        self.__executeur.execute(la_requette)       
+        la_requette= "SELECT Nom, Date, Heure_debut, Heure_fin,  Type, Remarque, Resultat, Prescription FROM Medecin AS m INNER JOIN Examination as e ON m.Code_medecin = e.Code_medecin WHERE Code_patient= ?" 
+        self.__executeur.execute(la_requette, (code_patient, ))       
         return self.__executeur.fetchall()                 
 
     def recuper_rendez_vous (self, code_patient):
-        la_requette= f"SELECT Nom, Date, Heure, Raison FROM Medecin AS m INNER JOIN Rendez_vous as r ON m.Code_medecin = r.Code_medecin WHERE Code_patient= '{code_patient}'" 
-        self.__executeur.execute(la_requette)       
+        la_requette= "SELECT Nom, Date, Heure, Raison FROM Medecin AS m INNER JOIN Rendez_vous as r ON m.Code_medecin = r.Code_medecin WHERE Code_patient= ?" 
+        self.__executeur.execute(la_requette, (code_patient, ))       
         return self.__executeur.fetchall()                                  
 
     def recuper_agenda (self, code_medecin):
-        la_requette= f"SELECT Date, Heure, p.Code_patient, Nom, Prenom FROM Patient AS p INNER JOIN Rendez_vous as r ON p.Code_patient = r.Code_patient WHERE Code_medecin= '{code_medecin}'" 
-        self.__executeur.execute(la_requette)       
+        la_requette= "SELECT Date, Heure, p.Code_patient, Nom, Prenom FROM Patient AS p INNER JOIN Rendez_vous as r ON p.Code_patient = r.Code_patient WHERE Code_medecin= ?" 
+        self.__executeur.execute(la_requette, (code_medecin, ))       
         return self.__executeur.fetchall()     
 
     def __str_elt_condition(self, tab_elt_valeur, nb_elt):
